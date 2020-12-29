@@ -3,8 +3,7 @@
 PasSkull is a web tool for managing 'Password Dump' files that are retrieved from the internet, including upload, search and export utilities. 
 
 ## Prerequisites
-
-Please install Cassandra.
+* install Cassandra.
 ```
 $ echo "deb https://downloads.apache.org/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
 $ curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
