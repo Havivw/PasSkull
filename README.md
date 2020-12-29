@@ -1,6 +1,6 @@
 # PasSkull
 ​
-Pass Skull is a web tool for manage your Password Dump file from the internet.
+PasSkull is a web tool for manage your Password Dump file from the internet.
 
 ##Prerequisites
 
@@ -18,7 +18,7 @@ $ sudo apt-get install build-essential python-dev python3-pip libev4 libev-dev -
 Download the PasSkull folder and install with pip.
 ​
 ```shell
-$ sudo pip install -r requirement.txt
+$ sudo pip3 install -r requirement.txt
 ```
 
 ### with MFA
@@ -47,8 +47,9 @@ $ python3 app_no_MFA.py
  
   
 ##TODO
- * while search hash show only hash and passwords.
+ * while search hash show only hash and passwords (uniq).
  * MFA test after create user.
+ * fix DeprecationWarning from WTForms.
  
 ## Contributions..
 ​
