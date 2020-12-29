@@ -2,7 +2,7 @@
 ​
 PasSkull is a web tool for manage your Password Dump file from the internet.
 
-##Prerequisites
+## Prerequisites
 
 Please install Cassandra.
 ```
@@ -31,7 +31,7 @@ $ python3 app.py
 $ python3 app_no_MFA.py
 ```
 ​
-##Supported ​
+## Supported ​
  * Searching by user name.
  * Searching by email address.
  * Searching by domain.
@@ -40,7 +40,7 @@ $ python3 app_no_MFA.py
  * Getting random credentials from DB.
  * Multiple users (admin and regular).
    
-##TODO
+## TODO
 
  * while search hash show only hash and passwords (uniq).
  * MFA test after create user.
@@ -48,9 +48,7 @@ $ python3 app_no_MFA.py
  
 ## Additional Information
   Cassandra need Storage for data!
-###for study purposes only.
-###Holding password leak data is illegal!
-###Using is AT YOUR OWN RISK!
+### disclaimer: saving leaked passwords data is illegal. This project is meant for study purposes only, use at your own risk!
 
 ## Thanks
 * Shirley Rabin for contribute and help.
