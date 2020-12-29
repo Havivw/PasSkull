@@ -1,0 +1,11 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    color: #fefefe;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    background-color: #002242;
+    /*text-shadow: 1px 1px 1px #111;*/
+    height: 100%;
+}

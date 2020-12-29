@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+    {% if results %}
+<header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='search.css') }}" />
+</header>
+<body>
+          <form class="form-horizontal" method="POST" action="{{ url_for('search') }}">
+    <fieldset>
+          <div class="form-group">
+        <div class="col-md-4">
+            <select id="key" name="key" class="form-control">
+                <option value="domainname"> Domain </option>
+                <option value="username"> User </option>
+                <option value="hash"> HASH </option>
+                <option value="mail"> Mail </option>
+            </select>
+            <input class="form-control" placeholder="Insert string" name="value" type="text" value="{{request.form.value }}">
+            <label class="col-md-4 control-label" for="buttonSelect"></label>
+            <div class="col-md-8">
+              <input class="primary" id="submit_use_loader" type="submit" value="Submit" />
+            </div>
+        </div>
+      </div>
+    </fieldset>
+          </form>
+          <div class="well well-lg">
+              {{ pagination.links }}
+              <table class="users">
+               <thead>
+                 <tr>
+                     <th class="row-1 row-ID">ID</th>
+                     <th class="row-2 row-name">User Name</th>
+                     <th class="row-3 row-name">Domain Name</th>
+                     <th class="row-4 row-name">Password</th>
+                     <th class="row-5 row-hash">MD5</th>
+                     <th class="row-6 row-hash">NTLM</th>
+                     <th class="row-7 row-hash">SHA1</th>
+
+                 </tr>
+               </thead>
+
+                  <tbody>
+                  {% for row in results %}
+                 <tr>
+                     <td> {{ loop.index + (page - 1) * per_page }} </td>
+                     <td> {{ row.0 }} </td>
+                     <td> {{ row.1 }} </td>
+                     <td> {{ row.2 }} </td>
+                     <td> {{ row.3 }} </td>
+                     <td> {{ row.4 }} </td>
+                     <td> {{ row.5 }} </td>
+                    <td> <a href="/removerow?id={{ row.6 }}" class="fa fa-trash"  title="Remove row">
+                        <i class="btn-icon-only icon-play"></i>
+                    </a></td>
+                 </tr>
+               {% endfor %}
+               </tbody>
+             </table>
+              {{ pagination.links }}
+          </div>
+        </body>
+
+    {% else %}
+    <header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='search.css') }}" />
+</header>
+<body>
+          <form class="form-horizontal" method="POST" action="{{ url_for('search') }}">
+    <fieldset>
+          <div class="form-group">
+        <div class="col-md-4">
+            <select id="key" name="key" class="form-control">
+                <option value="domainname"> Domain </option>
+                <option value="username"> User </option>
+                <option value="hash"> HASH </option>
+                <option value="mail"> Mail </option>
+          </select>
+            <input class="form-control" placeholder="Insert string" name="value" type="text" value="{{request.form.value }}">
+            <label class="col-md-4 control-label" for="buttonSelect"></label>
+            <div class="col-md-8">
+              <input class="primary" id="submit_use_loader" type="submit" value="Submit" />
+            </div>
+        </div>
+      </div>
+    </fieldset>
+          </form>
+          <div class="well well-lg">
+              <table class="users">
+               <thead>
+                 <tr>
+                     <th class="row-1 row-ID">ID</th>
+                     <th class="row-2 row-name">User Name</th>
+                     <th class="row-3 row-name">Domain Name</th>
+                     <th class="row-4 row-name">Password</th>
+                     <th class="row-5 row-hash">NTLM</th>
+                     <th class="row-6 row-hash">MD5</th>
+                     <th class="row-7 row-hash">SHA1</th>
+
+                 </tr>
+               </thead>
+
+                  <tbody>
+                 <tr>
+                     <td></td>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+
+                 </tr>
+               </tbody>
+             </table>
+          </div>
+        </body>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='error_page.css') }}" />
+<div class="error-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="error-text">
+                    <h1 class="error">Error {{ number }}</h1>
+                    <div class="im-sheep">
+                        <div class="top">
+                            <div class="body"></div>
+                            <div class="head">
+                                <div class="im-eye one"></div>
+                                <div class="im-eye two"></div>
+                                <div class="im-ear one"></div>
+                                <div class="im-ear two"></div>
+                            </div>
+                        </div>
+                        <div class="im-legs">
+                            <div class="im-leg"></div>
+                            <div class="im-leg"></div>
+                            <div class="im-leg"></div>
+                            <div class="im-leg"></div>
+                        </div>
+                    </div>
+                    <h4>{{ msg1 }}</h4>
+                    <p>{{ msg2 }}</p>
+                    {% if number == 401 %}
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-round">Go to homepage</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-primary btn-round">Go to login</a>
+                    {% else %}
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-round">Go to homepage</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

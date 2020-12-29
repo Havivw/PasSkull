@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}" />
+        <script type="application/javascript" src="{{ url_for('static', filename='upload.js') }}"></script>
+    </head>
+<body>
+
+<form id="upload_form" enctype="multipart/form-data" method="post">
+  <input type="file" name="file" id="file" onchange="uploadFile()"><br>
+  <progress class="progressBar" id="progressBar" value="0" max="100" style="-webkit-appearance: none; appearance: none; width:600px; height: 30px; "></progress>
+  <h3 id="status"></h3>
+  <p id="loaded_n_total"></p>
+</form>
+</body>
+{% endblock %}

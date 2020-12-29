@@ -1,0 +1,37 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    background-color: #002242;
+    /*text-shadow: 1px 1px 1px #111;*/
+    height: 100%;
+}
+.users {
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+}
+.users td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Column widths are based on these cells */
+.row-ID {
+    width: 5%;
+    text-align:left
+}
+.row-name {
+    width: 20%;
+    text-align:left
+}
+
+.row-hash {
+    overflow: auto;
+    text-align:left
+}
+

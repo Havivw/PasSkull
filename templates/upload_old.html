@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}" />
+    <!doctype html>
+    <title>Upload </title>
+    <h1>Upload Dump file</h1>
+    <form method=post enctype=multipart/form-data>
+      <label class="custom-file-upload"><input type=file name=file>
+         <input type=submit value=Upload class="button">
+      </label>
+    </form>
+{% endblock %}
