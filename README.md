@@ -31,12 +31,7 @@ $ python3 app.py
 $ python3 app_no_MFA.py
 ```
 ​
-## Additional Information
-​Cassandra need Storage for data!
-
-​
-##Supported 
-​
+##Supported ​
  * Searching by user name.
  * Searching by email address.
  * Searching by domain.
@@ -44,13 +39,22 @@ $ python3 app_no_MFA.py
  * Searching by hash list.
  * Getting random credentials from DB.
  * Multiple users (admin and regular).
- 
-  
+   
 ##TODO
+
  * while search hash show only hash and passwords (uniq).
  * MFA test after create user.
  * fix DeprecationWarning from WTForms.
  
+## Additional Information
+  Cassandra need Storage for data!
+###for study purposes only.
+###Holding password leak data is illegal!
+###Using is AT YOUR OWN RISK!
+
+## Thanks
+* Shirley Rabin for contribute and help.
+
 ## Contributions..
 ​
 ..are always welcome.
