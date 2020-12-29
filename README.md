@@ -1,16 +1,55 @@
-# Two Factor Authentication with Flask
+# PasSkull
+​
+Pass Skull is a web tool for manage your Password Dump file from the internet.
 
-This repository contains the example application for my [Two Factor Authentication with Flask](http://blog.miguelgrinberg.com/post/two-factor-authentication-with-flask) blog article.
+##Prerequisites
 
-## Installation
+Please install Cassandra.
+```
+$ echo "deb https://downloads.apache.org/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+$ curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install cassandra
+$ sudo pip3 install cassandra-driver
+$ sudo apt-get install build-essential python-dev python3-pip libev4 libev-dev -y
+```
+​
+## PasSkull Installation
+Download the PasSkull folder and install with pip.
+​
+```shell
+$ sudo pip install -r requirement.txt
+```
 
-To install your application on your computer follow these steps:
+### with MFA
+```shell
+$ python3 app.py
+```
 
-1. Clone this repository.
-2. Create a virtual environment and activate it.
-3. Run `pip install -r requirements.txt` to import all the dependencies.
-4. Run the application with `python app.py`.
-5. Go to `http://localhost:5000` in your address bar to connect to the application.
+### without MFA #TODO:WIP!
+```shell
+$ python3 app_no_MFA.py
+```
+​
+## Additional Information
+​Cassandra need Storage for data!
 
-See my [blog post](http://blog.miguelgrinberg.com/post/two-factor-authentication-with-flask) for detailed information on how this application works.
-
+​
+##Supported 
+​
+ * Searching by user name.
+ * Searching by email address.
+ * Searching by domain.
+ * Searching by users list.
+ * Searching by hash list.
+ * Getting random credentials from DB.
+ * Multiple users (admin and regular).
+ 
+  
+##TODO
+ * while search hash show only hash and passwords.
+ * MFA test after create user.
+ 
+## Contributions..
+​
+..are always welcome.

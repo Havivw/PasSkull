@@ -233,7 +233,7 @@ def random_password(session, keyspace, table):
                 pre = session.prepare(f'SELECT username, domainname, password FROM {keyspace}.{table} ' + """WHERE  id=?  ALLOW FILTERING""")
                 password_of_the_day = session.execute(pre.bind(rand_id))
                 password_of_the_day = list(password_of_the_day.all())[0]
-                username = f' {password_of_the_day[0]}@{password_of_the_day[1]}'
+                username = f'{password_of_the_day[0]}@{password_of_the_day[1]}'
                 password = password_of_the_day[2]
             except:
                 username = None
@@ -360,19 +360,16 @@ def search_list_in_db(file_list, session, keyspace, table, username, hashsearch,
     return list(results_set)
 
 
-def multi_search_list_in_db(func, args_lists, num_workers=5):
+def multi_search_list_in_db(func, args_lists, num_workers=10):
     tasks = []
     results = []
-    m = multiprocessing.Manager()
-    lock = m.Lock()
     with ThreadPoolExecutor(max_workers=num_workers) as threads_executor:
         for args_tup in args_lists:
             tasks.append(threads_executor.submit(func, *args_tup))
         for task in as_completed(tasks):
-            with lock:
-                try:
-                    result = task.result()[0]
-                    results.append(result)
-                except:
-                    pass
+            try:
+                result = task.result()[0]
+                results.append(result)
+            except:
+                pass
     return results
