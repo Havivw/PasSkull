@@ -48,11 +48,11 @@ $ python3 app_no_MFA.py
 ## Additional Information
   Cassandra needs Storage for data!
   
-### Important Disclaimer: 
-### This project is for study purposes only
-### Saving leaked passwords data is illegal 
-### The use of this code is your responsibility
-### use at your own risk
+### * Important Disclaimer: 
+### * This project is for study purposes only
+### * Saving leaked passwords data is illegal 
+### * The use of this code is your responsibility
+### * use at your own risk
 
 ## Thanks
 * shirlyrl for contribute and help.
