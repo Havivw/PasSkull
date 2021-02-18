@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}PasSkull{% endblock %}
+{% block title %}Pa$$kull{% endblock %}
 
 {% block navbar %}
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
@@ -13,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('index') }}">PasSkull</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Pa$$kull</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -24,7 +24,7 @@
                     <li><a href="{{ url_for('userslist') }}">Search Users List</a></li>
                     <li><a href="{{ url_for('hashlist') }}">Search Hash List</a></li>
                     <li><a href="{{ url_for('export') }}">Export</a></li>
-                    <li><a href="{{ url_for('random') }}">Password of the Day</a></li>
+                    <li><a href="{{ url_for('random') }}">Password of the Hour</a></li>
                 {% endif %}
                 {% if not current_user.is_authenticated and ucount == 0 %}
                 <li><a href="{{ url_for('adduser') }}">Register Admin</a></li>

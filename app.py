@@ -1,4 +1,7 @@
 import os
+import sys
+import time
+import pickle
 import base64
 from io import BytesIO
 
@@ -11,12 +14,14 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_paginate import Pagination, get_page_args
 from wtforms.validators import Required, Length, EqualTo
-from wtforms import StringField, PasswordField, SubmitField,BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from flask import Flask, render_template, redirect, url_for, flash, session, abort, flash, request, Response, send_file
 
 from Main import *
+
+import background_tasks
 
 # create application instance
 app = Flask(__name__)
@@ -31,7 +36,6 @@ db = SQLAlchemy(app)
 lm = LoginManager(app)
 TABLE = "PasSkull"
 KEYSPACE = "passkullspace"
-cassandra_session = create_db_session()
 search_results_by_username = {}
 
 
@@ -152,9 +156,6 @@ def error401(error):
     msg1 = 'Unauthorized!'
     msg2 = 'What about login?! try it maybe its magic...'
     return render_template("error_page.html", number=number,msg1=msg1, msg2=msg2), 401
-
-
-
 
 
 @app.route('/')
@@ -302,7 +303,14 @@ def logout():
 @app.route('/random')
 def random():
     if current_user.is_authenticated:
-        username, password = random_password(session=cassandra_session, keyspace=KEYSPACE, table=TABLE)
+        while True:
+            try:
+                with open("/data/Passkull/Web_Data/Password_hour", "rb") as f:
+                    username, password = pickle.load(f)
+                    break
+            except Exception as e:
+                print("Password_hour file not exist, trying again in 5 second")
+                time.sleep(5)
         return render_template('password_of_the_Day.html', username=username, password=password)
 
     return redirect(url_for('login'))
@@ -331,7 +339,7 @@ def search():
                 results = search_results_by_username[current_user.username]
             else:
                 initilize_export_file(username=current_user.username, hashsearch=False)
-                results = search_in_database_regex(key=session['key'], value=session['value'], session=cassandra_session, keyspace=KEYSPACE, table=TABLE, username=current_user.username)
+                results = search_in_database_regex(key=session['key'], value=session['value'], keyspace=KEYSPACE, table=TABLE, username=current_user.username)
             len_results = len(results)
             pagination_results = get_results(results=results, offset=offset, per_page=per_page)
             pagination = Pagination(page=page, per_page=per_page, total=len_results, css_framework='bootstrap4')
@@ -386,7 +394,7 @@ def userslist():
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{current_user.username}_PassDump_Search.txt')
                 file.save(file_path)
-                results = search_list_in_db(file_list=file_path, session=cassandra_session, keyspace=KEYSPACE, table=TABLE, username=current_user.username, hashsearch=False, key='mail')
+                results = search_list_in_db(file_list=file_path, keyspace=KEYSPACE, table=TABLE, username=current_user.username, hashsearch=False, key='mail')
                 search_results_by_username[current_user.username] = results
                 os.remove(file_path)
                 print('Done')
@@ -416,7 +424,7 @@ def hashlist():
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{current_user.username}_PassDump_Search.txt')
                 file.save(file_path)
-                results = search_list_in_db(file_list=file_path, session=cassandra_session, keyspace=KEYSPACE, table=TABLE, username=current_user.username, hashsearch=True, key='hash')
+                results = search_list_in_db(file_list=file_path, keyspace=KEYSPACE, table=TABLE, username=current_user.username, hashsearch=True, key='hash')
                 search_results_by_username[current_user.username] = results
                 os.remove(file_path)
                 print('Done')
@@ -430,7 +438,7 @@ db.create_all()
 def remove_row():
 
     if current_user.is_authenticated:
-        delete_row(session=cassandra_session, keyspace=KEYSPACE, table=TABLE, id=request.args.get('id'))
+        delete_row(keyspace=KEYSPACE, table=TABLE, id=request.args.get('id'))
         return redirect(url_for('search'))
     return redirect(url_for('login'))
 
@@ -457,9 +465,16 @@ def export():
 @app.route('/status')
 def status():
     if current_user.is_authenticated:
-        results = count_db_rows(session=cassandra_session, keyspace=KEYSPACE, table=TABLE)
+        while True:
+            try:
+                with open("/data/Passkull/Web_Data/DB_status", "rb") as f:
+                    results = pickle.load(f)
+                    break
+            except Exception as e:
+                print("DB_status file not exist, trying again in 5 second")
+                time.sleep(5)
         return render_template('count.html', results=results)
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
