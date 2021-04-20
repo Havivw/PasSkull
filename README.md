@@ -51,7 +51,7 @@ $ python3 app_no_MFA.py
 ### disclaimer: saving leaked passwords data is illegal. This project is meant for study purposes only, use at your own risk!
 
 ## Thanks
-* Shirley Rabin for contribute and help.
+* Shirlyrl for contribute and help.
 
 ## Contributions..
 ​
