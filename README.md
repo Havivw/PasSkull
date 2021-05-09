@@ -30,7 +30,7 @@ $ python3 app.py
 ```shell
 $ python3 app_no_MFA.py
 ```
-​
+
 ## Supported ​
  * Searching by user name.
  * Searching by email address.
