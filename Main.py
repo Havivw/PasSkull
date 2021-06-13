@@ -220,7 +220,7 @@ def get_count(keyspace, table, domain_name=None):
     return (domain_name, total_count)
 
 
-def count_db_rows(keyspace, table, domain_name_list=('Gmail', 'Yahoo', 'OTORIO', 'Andritz', 'MSC.com')):
+def count_db_rows(keyspace, table, domain_name_list=('Gmail', 'Yahoo')):
     session = create_db_session()
     res_dict = {}
     try:
